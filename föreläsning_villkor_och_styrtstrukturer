@@ -1,0 +1,59 @@
+"""
+Föreläsning inmatning och strystrukturer 11/9
+Skriven av Jonatan Linn
+Kurskod: DD1310
+"""
+
+x = 2
+
+def is_even(x):
+    """Retunerar om x är jämn eller inte"""
+    jämn = x % 2
+    if jämn == 0:
+        return True
+    else:
+        return False
+
+def is_odd(x):
+    """Retunerar om x är udda eller inte"""
+    rest = x % 2
+    if rest != 0:
+        return True
+    else:
+        return False
+
+print(is_even(x))
+print(is_odd(x))
+
+length = 180
+
+def sel_mattress(weight):
+    """Frågar om vikt, returnerar rekommenderad hårdhet."""
+
+    if  weight < 60:
+        return "Du trivs nog best i en mjuk madrass"
+    elif weight < 80:
+        return "Du trivs nog best i en mellanhård madrass"
+    else:
+        return "Du trivs nog best i en hård madrass"
+
+if length < 140:
+    print("Du ska använda en barnsäng (140 cm)")
+
+elif length < 200:
+    print("Du kan använda en vanlig vuxensäng (200 cm)")
+    weight = int(input("hur mycket väger du? "))
+    print(sel_mattress(weight))
+
+elif length < 220:
+    print("Du sak använda en lång vuxensäng (220 cm)")
+    weight = int(input("hur mycket väger du? "))
+    print(sel_mattress(weight))
+
+else:
+    print("Vi har tuvärr ingten säng för dig")
+
+if mattres == None
+
+else
+    

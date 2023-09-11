@@ -1,0 +1,27 @@
+"""
+Föreläsning inmatning och strystrukturer 11/9
+Skriven av Jonatan Linn
+Kurskod: DD1310
+"""
+
+# test av elseif-satser
+betyg = int(input("Ge poäng mellan 1-100: "))
+
+if betyg >= 90:
+ print("Du fick betyget A")
+elif betyg >= 80: 
+ print("Du fick betyget B")
+elif betyg >= 70:
+ print("Du fick betyget C")
+elif betyg >= 60:
+ print("Du fick betyget D")
+elif betyg >= 50:
+ print("Du fick betyget E")
+else:
+ print("Du fick betyget F")
+
+print("e", end = " ")
+
+# test av svar på en fråga
+namn = input("Vad heter du? ") 
+print("Hej, " + namn)
