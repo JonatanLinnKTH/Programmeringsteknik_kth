@@ -8,8 +8,8 @@ print("Halloj! Här räknas summan för en aritmetisk och geometrisk talföljd u
 
 första_elementet = 1
 antal_tal = 3
-differensen = 2
-kvoten = 3
+differensen = 1
+kvoten = 2
 
 print("I detta fall räknar vi ut den aritmetiska och geometriska summan för följade uppställning:")
 print(f"Första elemetet i talföljden är: {första_elementet}")
@@ -27,8 +27,6 @@ def beräkna_geometrisk_summa (första_elementet, kvoten, antal_tal):
     """Räknar ut summan av den geometriska talföljden givet värdet på första 
     elementet, kvoten mellan elementen och antalet tal i talföljden"""
     return första_elementet * (kvoten**antal_tal - 1) / (kvoten - 1)
-
-
 
 aritmetisk_summa = beräkna_aritmetisk_summa(första_elementet, differensen, antal_tal)
 geometrisk_summa = beräkna_geometrisk_summa(första_elementet, kvoten, antal_tal)
