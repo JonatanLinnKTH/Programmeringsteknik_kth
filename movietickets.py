@@ -1,15 +1,13 @@
 barn_pris = 10
 vuxen_pris = 20
+print("Hej och välkommen till biljettcentret!")
 
-antal_biljetter = input("Hur många biljetter vil du köpa? ") #felstavning
-antalBiljetter = int(antal_biljetter) # kan skrivas på samma rad och följer inte namnstandard
+antal_biljetter = int(input("Hur många biljetter vill du köpa? "))
 
-antal_vuxen = input("Hur många av de biljetterna är för en vuxen? ")
-antalVuxen = int(antal_vuxen) # kan skrivas på samma rad och följer inte namnstandard
+antal_vuxen = int(input("Hur många av de biljetterna är för en vuxen? "))
 
-antal_barn = antalBiljetter - antalVuxen
+antal_barn = antal_biljetter - antal_vuxen
 
-total_pris = antal_barn*barn_pris + antalVuxen*vuxen_pris
+total_pris = antal_barn*barn_pris + antal_vuxen*vuxen_pris
 
-print("Du ska betala:")
-print(total_pris) # kan skrivas på samma rad
+print(f"Du ska betala: {total_pris} kr")
