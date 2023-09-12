@@ -25,3 +25,4 @@ print("e", end = " ")
 # test av svar på en fråga
 namn = input("Vad heter du? ") 
 print("Hej, " + namn)
+
