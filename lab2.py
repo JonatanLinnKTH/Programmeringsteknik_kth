@@ -34,6 +34,8 @@ geometriska talföljderna som är störst
       """)
 
 inte_rätt = True
+
+# Lösningsmetod för felhantering från övning 12/9
 while inte_rätt:
     try:
         print("Data för den aritmetiska summan:")
