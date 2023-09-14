@@ -4,6 +4,7 @@ Det hanterar även om man skriver in fel data till programmet
 Skriven av Jonatan Linn
 Kurskod: DD1310
 """
+
 def beräkna_aritmetisk_summa (första_elementet, differensen, antal_tal):
     """Räknar ut summan av den aritmetiska talföljden givet värdet på första 
     elementet, differensen mellan elementen och antalet tal i talföljden"""
@@ -21,23 +22,16 @@ def vilken_summa_är_störst (aritmetisk, geometrisk):
     """Räknar ut vilken summa som är störst och skriver ut medelanden som svar"""
 
     if aritmetisk > geometrisk:
-        print("Den aritmetiska summan är störst")
+        print("Den aritmetiska summan är störst\n")
     elif aritmetisk < geometrisk:
-        print("Den geometriska summan är störst")
+        print("Den geometriska summan är störst\n")
     else:
-        print("Summorna är lika")
+        print("Summorna är lika\n")
 
 print("""
 Halloj och välkommen! Med det här programmet kan du räkna vilken summa av de aritmetiska eller 
 geometriska talföljderna som är störst
       """)
-
-
-"""Fel att hålla reda på:
-* Matar in en string i första fyra inmatningarna 
-* Matar in string eller float i antal tal
-* Matar in en inkompatibel kvot
-"""
 
 inte_rätt = True
 while inte_rätt:
@@ -55,7 +49,7 @@ while inte_rätt:
             inte_rätt = False
 
     except ValueError:
-        print("\nDet där var inte ett flyttal, försök igen.\n")
+        print("\nDet där var inte ett flyttal, skriv in alla datan på ett annat sätt.\n")
 
 inte_rätt = True
 while inte_rätt:
@@ -69,7 +63,7 @@ while inte_rätt:
 aritmetisk_summa = beräkna_aritmetisk_summa(första_elementet_aritmetisk, differensen, antal_tal)
 geometrisk_summa = beräkna_geometrisk_summa(första_elementet_geometrisk, kvoten, antal_tal)
 
-print(f"\nDen aritmetiska summan är: {int(aritmetisk_summa)}") # ta bort detta
-print(f"Den geometriska summan är: {int(geometrisk_summa)}\n") # ta bort detta
+print(f"\nDen aritmetiska summan är: {float(aritmetisk_summa)}") # ta bort detta
+print(f"Den geometriska summan är: {float(geometrisk_summa)}\n") # ta bort detta
 
 vilken_summa_är_störst(aritmetisk_summa, geometrisk_summa)
