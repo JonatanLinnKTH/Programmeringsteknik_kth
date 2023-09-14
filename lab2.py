@@ -63,7 +63,4 @@ while inte_rätt:
 aritmetisk_summa = beräkna_aritmetisk_summa(första_elementet_aritmetisk, differensen, antal_tal)
 geometrisk_summa = beräkna_geometrisk_summa(första_elementet_geometrisk, kvoten, antal_tal)
 
-print(f"\nDen aritmetiska summan är: {float(aritmetisk_summa)}") # ta bort detta
-print(f"Den geometriska summan är: {float(geometrisk_summa)}\n") # ta bort detta
-
 vilken_summa_är_störst(aritmetisk_summa, geometrisk_summa)
