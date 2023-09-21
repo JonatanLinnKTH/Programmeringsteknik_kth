@@ -42,14 +42,7 @@ talföljderna som är störst""")
 
     print("\nData för den geometriska summan:")
     första_elementet_geometrisk = skriven_input.input_float("Var ska det första elemetet i serien ha för värde? ","Första elementet")
-    
-    inte_rätt = True
-    while inte_rätt:
-        kvoten = skriven_input.input_float("Vad är kvoten för talföljden? ","Kvoten")
-        if kvoten == 1:
-            print("Kvoten kan inte vara lika med ett, försök igen")
-        else:
-            inte_rätt = False
+    kvoten = skriven_input.input_float("Vad är kvoten för talföljden? " ,"Kvoten", kan_inte_va_ett=True)
 
     antalet_tal = skriven_input.input_nat("\nVad är antalet termer i talföljderna? ","Antalet tal")
 
