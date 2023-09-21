@@ -31,7 +31,7 @@ def vilken_summa_är_störst (aritmetisk, geometrisk):
         print("Summorna är lika\n")
 
 def huvudprogram():
-    """Hälsar välkommen till programmet och ställer ställer frågorna"""
+    """Hälsar välkommen till programmet, ställer ställer frågorna och retunerar svaret"""
     print("""Halloj och välkommen!
 Med det här programmet kan du räkna vilken summa av de aritmetiska eller geometriska 
 talföljderna som är störst""")
@@ -44,7 +44,7 @@ talföljderna som är störst""")
     första_elementet_geometrisk = skriven_input.input_float("Var ska det första elemetet i serien ha för värde? ","Första elementet")
     kvoten = skriven_input.input_float("Vad är kvoten för talföljden? " ,"Kvoten", kan_inte_va_ett=True)
 
-    antalet_tal = skriven_input.input_nat("\nVad är antalet termer i talföljderna? ","Antalet tal")
+    antalet_tal = skriven_input.input_nat("\nVad är antalet termer i talföljderna? ","Antalet termer")
 
     aritmetisk_summa = beräkna_aritmetisk_summa(första_elementet_aritmetisk, differansen, antalet_tal)
     geometrisk_summa = beräkna_geometrisk_summa(första_elementet_geometrisk, kvoten, antalet_tal)

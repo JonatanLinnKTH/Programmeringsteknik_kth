@@ -53,7 +53,7 @@ def input_nat(input_text, variabelnamn = "Den här variabeln"):
             print(variabelnamn, feltext)
 
 def huvudprogram():
-    """Körs när filen kör filen direkt"""
+    """Körs när man kör filen direkt, för att testa alla funktioner"""
     testvärde_float = input_float("Vad är flyttalet? ","Flytalet",False)
     testvärde_int = input_int("Vad är heltalet? ","Heltalet")
     testvärde_nat = input_nat("Vad är det naturliga talet? ","Det natruliga talet")
