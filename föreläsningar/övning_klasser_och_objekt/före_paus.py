@@ -1,6 +1,6 @@
-""" Testprogramm klasser och objekt"""
+"""Testprogramm klasser och objekt"""
 
-"""Classer använs för att skapa nya datortyper"""
+"""Classer använs för att skapa nya datortyper som inte är de fördefinierade av phytorn"""
 
 class Bil:
     def __init__(self, märke, modell):
@@ -13,7 +13,7 @@ class Bil:
 
 
 minBil = Bil("volvo", "XE60")
-print(minBil)
+# print(minBil)
 
 bilar = [Bil("Smart", "?"), Bil("Lambo", "coutch")]
 bilar.append(minBil)
