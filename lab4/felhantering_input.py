@@ -13,7 +13,7 @@ def input_fullständigt_namn(inputtext):
     while fel_inmatning:
         inputen = input(inputtext)
         inputen_uppdelad = inputen.split(" ")
-        
+
         bara_bokstäver = True
         for namn in inputen_uppdelad:
             if not namn.isalpha():
@@ -26,7 +26,7 @@ def input_fullständigt_namn(inputtext):
         else:
             fel_inmatning = False
             return inputen.split(" ",1)
-     
+
 def input_siffror(input_text, antal_siffror = "ingen begränsning", variabelnamet = "Värdet"):
     """Tar in textten som man vill ha tillsammans med inputen och namnet på variabeln.
     Funktionen skickar sen tillbaka inputen om endast siffror av rett antal har matats in."""

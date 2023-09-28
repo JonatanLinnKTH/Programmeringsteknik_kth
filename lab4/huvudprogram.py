@@ -19,7 +19,7 @@ def huvudprogram():
     """Hälsar välkommen till programmet, ställer frågorna och retunerar svaret"""
     print("\nHalloj och välkommen!")
     print("Här är ett programm där du kan mata in information om studenter som sedan matas ut i en prydlig lista!\n")
-    
+
     antal_studenter = felhantering_input.input_siffror("Hur många studenter ska matas in?: ", variabelnamet= "antal studenter")
     studentlista = []
     for i in range(antal_studenter):
