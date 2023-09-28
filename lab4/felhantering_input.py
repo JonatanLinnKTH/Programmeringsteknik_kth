@@ -40,13 +40,4 @@ def input_siffror(input_text, antal_siffror = "ingen begränsning", variabelname
         else:
             fel_inmatning = False
             return int(inputen)
-
-def test_prigram():
-    """Körs när man kör filen direkt, för att testa alla funktioner"""
-    namn = input_fullständigt_namn("Säg dit fullstädniga namn ")
-    print(namn)
-    # personnummer = input_siffror("Personnummer: ", variabelnamet = "personnummret")
-    # print(personnummer)
-
-if __name__ == "__main__":
-    test_prigram()
+        

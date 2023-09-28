@@ -15,19 +15,6 @@ class Student:
     def __str__(self):
         return "Namn: " + self.förnamn + " " + self.efternamn + ", Personnummer: " + str(self.personnummer)
 
-    def skriv_info(self): # Onödig, ta bort
-        print("Förnamn:", self.förnamn)
-        print("Efternamn:", self.efternamn)
-        print("Personnummer:", str(self.personnummer))
-
-def testprogram():
-    """Program för att testa så att klassen Student samt dess metoder fungerar som de ska"""
-    print("")
-    student_1 = Student("Bengt", "Johansson Svenssson", 9804103493)
-    student_1.skriv_info()
-    print("")
-    print(student_1)
-
 def huvudprogram():
     """Hälsar välkommen till programmet, ställer frågorna och retunerar svaret"""
     print("\nHalloj och välkommen!")
@@ -47,4 +34,3 @@ def huvudprogram():
         print(studentlista[i])
 
 huvudprogram()
-#testprogram()  
