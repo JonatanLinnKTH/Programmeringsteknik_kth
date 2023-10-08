@@ -128,8 +128,7 @@ class Bank:
                 konto.ta_ut(pengar)
             else:
                 print("Du angav fel pinkod! Inget uttag beviljas!")
-
-
+                
     def menyval():
         """Skriver ut menyn, läser in och returnerar användarens val
         Parametrar: inget
@@ -155,7 +154,7 @@ def huvudprogram():
     print("---------------------------------")
     bank = Bank()
     bank.las_konton()
-    val = menyval()
+    val = Bank.menyval()
     while val != "A":
         if val == "N":
             bank.nytt_konto()
