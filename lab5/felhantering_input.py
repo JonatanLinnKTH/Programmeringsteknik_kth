@@ -27,7 +27,7 @@ def input_fullständigt_namn(inputtext):
             fel_inmatning = False
             return inputen.split(" ",1)
 
-def input_siffror(input_text, antal_siffror = "ingen begränsning", variabelnamet = "Värdet"):
+def input_siffervärden(input_text, antal_siffror = "ingen begränsning", variabelnamet = "Värdet"):
     """Tar in textten som man vill ha tillsammans med inputen och namnet på variabeln.
     Funktionen skickar sen tillbaka inputen om endast siffror av rett antal har matats in."""
     fel_inmatning = True
@@ -39,5 +39,5 @@ def input_siffror(input_text, antal_siffror = "ingen begränsning", variabelname
             print(f"Mata in det {antal_siffror}-siffriga", variabelnamet)
         else:
             fel_inmatning = False
-            return int(inputen)
+            return inputen
         
