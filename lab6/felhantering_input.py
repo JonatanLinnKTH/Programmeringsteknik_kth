@@ -8,7 +8,7 @@ def input_finns_filen(inputtext):
     while fel_inmatning:
         try:
             inputen = input(inputtext)
-            with open(inputen, "r") as fil:
+            with open(inputen, "r", encoding="utf-8"):
                 pass
             fel_inmatning = False
             return inputen
@@ -51,10 +51,3 @@ def input_siffervärden(input_text, antal_siffror = "ingen begränsning", variab
         else:
             fel_inmatning = False
             return inputen
-        
-def huvudprogram():
-    översta_raden = input_finns_filen("Vilken fil?: ")
-    print(översta_raden)
-
-if __name__ == "__main__":
-    huvudprogram()
