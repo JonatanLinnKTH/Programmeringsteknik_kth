@@ -3,6 +3,17 @@ Detta program hjälper dig att se till att all input som kommer in är av rett d
 Skriven av Jonatan Linn
 Kurskod: DD1310
 """
+def input_finns_filen(inputtext):
+    fel_inmatning = True
+    while fel_inmatning:
+        try:
+            inputen = input(inputtext)
+            with open(inputen, "r") as fil:
+                pass
+            fel_inmatning = False
+            return inputen
+        except FileNotFoundError:
+            print("Filnamnet finns inte, försök igen")
 
 def input_fullständigt_namn(inputtext):
     """Tar in texten som ska vara tillsammmans med inputen och
@@ -41,3 +52,9 @@ def input_siffervärden(input_text, antal_siffror = "ingen begränsning", variab
             fel_inmatning = False
             return inputen
         
+def huvudprogram():
+    översta_raden = input_finns_filen("Vilken fil?: ")
+    print(översta_raden)
+
+if __name__ == "__main__":
+    huvudprogram()
