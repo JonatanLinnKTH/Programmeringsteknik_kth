@@ -1,0 +1,86 @@
+************************************************************************
+* *
+* Spec av Fiktiv P-uppgift: Bankkonton *
+* *
+* Skriven av: Phineas *
+* Grupp: Perry *
+* *
+* Beskrivning: *
+* Programmet ska hantera bankkonton. *
+* Användaren ska kunna öppna ett konto, sätta in och ta ut pengar, *
+* byta PIN-kod samt se de senaste tio transaktionerna. *
+* All kontodata ska sparas på fil mellan körningar. *
+* *
+************************************************************************
+------------------------------ Klasser -------------------------------
+Klassen Konto som representerar ett bankkonto.
+Attribut:
+namn En sträng med kontoinnehvarens namn
+saldo Ett heltal - pengar på kontot just nu
+pin_kod En sträng med bankomatkoden, 4 siffror
+transaktioner En lista med de tio senaste insättningarna/uttagen
+Metoder:
+def __init__(self,namn,pengar):
+""" Skapar nytt konto.
+ÄNDRAR namn, saldo, pin_kod, transaktioner"""
+def __str__(self):
+""" Kontoinformation för utskrift.
+RETURNERAR namn och saldo som en sträng"""
+def uttag(self):
+"""Tar ut pengar från kontot.
+ÄNDRAR saldo"""
+def insattning(self):
+"""Sätter in pengar på kontot.
+ÄNDRAR saldo"""
+def ok_PIN(self):
+"""Ber om PIN-kod och kollar om den stämmer.
+RETURNERAR True om koden var korrekt, False annars"""
+def byta_PIN(self):
+"""Låter användaren byta kod.
+ÄNDRAR pin_kod"""
+------------------------ Datastruktur ----------------------------------
+Varje bankkonto representeras av ett Konto-objekt.
+Alla bankkonton lagras i en dictionary med namnet som nyckel.
+Mellan programkörningarna lagras alla data på en textfil.
+--------------------------- Funktioner ---------------------------------
+def las_in_konton(fil):
+"""Läser in konton från fil.
+INDATA är filen
+UTDATA en dictionary med all kontoinformation"""
+def meny():
+"""Skriver ut menyn:
+- Öppna nytt konto
+- Insättning
+- Uttag
+- Byta pin
+- Visa transaktioner"""
+def menyval():
+"""Läser in vad användaren väljer att göra.
+UTDATA är en siffra - valt menyalternativ."""
+def anropa(val)
+"""Anropar den metod som användaren valt.
+INDATA är siffran som motsvarar valt alternativ i menyn."""
+def visa_konton(konton):
+"""Skriver ut info om alla konton på skärmen.
+INDATA är alla kontona"""
+def lagra_i_fil(fil,konton):
+"""Lagrar kontoinfo på fil.
+INDATA är filen och kontona"""
+------------------------------ Algoritm --------------------------------
+1. Programmet läser in alla konton från fil
+2. Identifierar kontoinnehavaren. Om pin-koden är rätt:
+3. Upprepa följande tills användaren vill sluta:
+* Hämta kontot
+* Visa menyn
+* Läs in menyalternativ
+* Anropa vald metod
+4. När användaren väljer att avsluta ska de ändrade kontouppgifterna
+(hela dictionaryn) skrivas ut på filen igen.
+Simon Semla
+48000
+1234
+[-500,28000.-1000,-1000...]
+Rita Hayworth
+2000000
+9999
+[-500,-500.200,-1000...]

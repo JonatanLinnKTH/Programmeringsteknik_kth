@@ -20,8 +20,8 @@ print(3*hej) # man kan multipricera en sträng med heltal
 def returns_nothing(x):
     y = x + 2
 
-y = returns_nothing(2)
-z = returns_nothing(2)
+# y = returns_nothing(2)
+# z = returns_nothing(2)
 
 print(f"y = {y}")
 print(f"z = {z}")

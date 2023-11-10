@@ -53,7 +53,5 @@ elif length < 220:
 else:
     print("Vi har tuvärr ingten säng för dig")
 
-if mattres == None
 
-else
     
