@@ -65,18 +65,36 @@ class Parkeringshus:
     
     def registrera_ny_bil(self):
         """Skapar en ny bil och sparar den i biblioteket bilar"""
+        print("\nRegistrering av ny bil")
         registreringsnummer = input("Vad är bilens registreringsnummer? ")
         ägare = input("Vad är namnet på bilens ägare? ")
         biltyp = input("Kategoriserars bilensom listen, mellan eller stor? ")
         self.bilar[registreringsnummer] = Bil(registreringsnummer, ägare, biltyp)
-        print("Bilen är registrerad med följande information")
-        print(self.bilar[registreringsnummer])
+        print("\nBilen registrerad!")
 
     def registrera_parkering(self):
         """Hanterar registrering av inpassage och utpassae, genom att bl.a. använda metoderna
         self.finns_bilen och Bil()"""
+        print("\nRegistering av inpassage och utpassage")
+        registreringsnummer = input("Ange registeringsnummer")
+        starttid = felhantering_input.tid("Ange tide för inpassage: ")
+        sluttid = felhantering_input.tid("Ange tiden för utpassage: ")
+        self.bilar[registreringsnummer].ny_parkering(starttid,sluttid)
+        print("\nParkering registerad!")
 
-    def läs_in_historik(self):
+    def läs_in_registreringshistorik(self):
+        """Läser in en fil med redan registreade bilar, genom att bl.a. använda 
+        bil.nu_parkering()"""
+        print("\nLäser in pareringshistorik")
+        filnamn = "registrerade_bilar.txt"
+        with open(filnamn,"r", encoding = "utf-8") as registrerade_bilar:
+            rad = registrerade_bilar.readline().strip()
+            while rad != "":
+                rad_uppdelad = rad.split(",")
+                self.bilar[rad_uppdelad[0]] = Bil(rad_uppdelad[0],rad_uppdelad[1],rad_uppdelad[2])
+                rad = registrerade_bilar.readline().strip()
+    
+    def läs_in_parkeringshistorik(self):
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
         metoderna self.finns_bilen och bil.ny_parkering()"""
 
@@ -99,6 +117,7 @@ def meny():
             V Visa parkeringshistorik för en bil 
             S Avsluta."""
     print("""
+            -------Meny------
             I Registrara parking 
             F Läs in fil med historik 
             N Lägg till ny bil 
@@ -113,11 +132,13 @@ def huvudprogram():
     som motsvarar menyvalet"""
     parkeringshus = Parkeringshus()
     print("Välkommen till kundsystemet för parkeringshuset!")
+    parkeringshus.läs_in_registreringshistorik()
     menyval = "Start"
     while menyval != "S":
         menyval = meny()
         tillbakatext = "Går tillbaka till menyn"
         if menyval == "I":
+            parkeringshus.registrera_parkering()
             print(tillbakatext)
         elif menyval == "F":
             print(tillbakatext)
@@ -129,7 +150,8 @@ def huvudprogram():
         elif menyval == "V":
             print(tillbakatext)
         else:
-            print("Sparar all registrerad information om bilar och parkeringar och avslutar programmet")
+            print("\nSparar all registrerad information om bilar och parkeringar och")
+            print("avslutar programmet\n")
 
 
 def testprogram_parkering():
