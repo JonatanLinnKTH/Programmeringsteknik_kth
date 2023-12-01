@@ -54,6 +54,84 @@ class Bil:
             parkeringslista += str(parkering) + "\n"
         return "Registrerade parkeringar: " + parkeringslista
 
+class Parkeringshus:
+    """Bestkriver ett parkeringshus registrerad i systemet"""
+    def __init__(self):
+        """Skapar ett tomt bibkiotek där bilar kan läggas in"""
+        self.bilar = {}
+    
+    def finns_bilen(self, registreringsnummer):
+        """Kontrollerar om bilen finns i biblioteket bilar"""
+    
+    def registrera_ny_bil(self):
+        """Skapar en ny bil och sparar den i biblioteket bilar"""
+        registreringsnummer = input("Vad är bilens registreringsnummer? ")
+        ägare = input("Vad är namnet på bilens ägare? ")
+        biltyp = input("Kategoriserars bilensom listen, mellan eller stor? ")
+        self.bilar[registreringsnummer] = Bil(registreringsnummer, ägare, biltyp)
+        print("Bilen är registrerad med följande information")
+        print(self.bilar[registreringsnummer])
+
+    def registrera_parkering(self):
+        """Hanterar registrering av inpassage och utpassae, genom att bl.a. använda metoderna
+        self.finns_bilen och Bil()"""
+
+    def läs_in_historik(self):
+        """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
+        metoderna self.finns_bilen och bil.ny_parkering()"""
+
+    def visa_parkeringshistorik(self):
+        """Hanterar utskriften av information om när bilen kom till och lämnade parkeringshuset
+        genom att använd medoden bil.ta_fram_parkeringshistorik"""
+
+    def spara_parkeringhistorik(self):
+        """Sparar alla bilars inpassager och utpassager på fil"""
+
+    def spara_bilinformation(self):
+        """Sparar all information om själa bilen: registreringsnummer, ägare och biltyp, på fil"""
+
+def meny():
+    """"Tar in användarens inmatning och returnerar menyvalet. Presenterar menyalternativen: 
+            I Registrara parking 
+            F Läs in fil med historik 
+            N Lägg till ny bil 
+            P Räkna ut parkeringskostnad för en bil 
+            V Visa parkeringshistorik för en bil 
+            S Avsluta."""
+    print("""
+            I Registrara parking 
+            F Läs in fil med historik 
+            N Lägg till ny bil 
+            P Räkna ut parkeringskostnad för en bil 
+            V Visa parkeringshistorik för en bil 
+            S Avsluta.""")
+    menyval = felhantering_input.menyval("Välj ett av åvanstående alternativ: ", ["I","F","N","P","V","S"])
+    return menyval
+
+def huvudprogram():
+    """Presenterar användaren för programmet, startar menyfunktionen samt anropar funktioner 
+    som motsvarar menyvalet"""
+    parkeringshus = Parkeringshus()
+    print("Välkommen till kundsystemet för parkeringshuset!")
+    menyval = "Start"
+    while menyval != "S":
+        menyval = meny()
+        tillbakatext = "Går tillbaka till menyn"
+        if menyval == "I":
+            print(tillbakatext)
+        elif menyval == "F":
+            print(tillbakatext)
+        elif menyval == "N":
+            parkeringshus.registrera_ny_bil()
+            print(tillbakatext)
+        elif menyval == "P":
+            print(tillbakatext)
+        elif menyval == "V":
+            print(tillbakatext)
+        else:
+            print("Sparar all registrerad information om bilar och parkeringar och avslutar programmet")
+
+
 def testprogram_parkering():
     parkering_1 = Parkering(time(12, 30), time(14, 40))
     print(parkering_1)
@@ -61,10 +139,12 @@ def testprogram_parkering():
 def testprogram_Bil():
     bil_1 = Bil("QPR556", "Carl von Testperson", "liten")
     print("Registrering av ny parkering")
-    starttid = felhantering_input.input_tid("Starttid för parkering")
-    sluttid = felhantering_input.input_tid("Sluttid för parkering")
+    starttid = felhantering_input.tid("Starttid för parkering")
+    sluttid = felhantering_input.tid("Sluttid för parkering")
     bil_1.ny_parkering(starttid, sluttid)
     print(bil_1)
 
-testprogram_Bil()
+huvudprogram()
+
+#testprogram_Bil()
 
