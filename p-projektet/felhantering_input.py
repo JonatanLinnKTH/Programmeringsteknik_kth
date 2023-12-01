@@ -18,8 +18,10 @@ def tid(inputtext):
 
         if inputen.count(":") != 1:
             print("Skriv in tiden med ett kolon ':' på formen HH:MM")
+        elif len(inputen) != 5:
+            print("Fel antal tecken. Skriv endast in tiden på formen HH:MM, ingen extra text")
         elif not bara_siffror:
-            print("Skriv endast in tiden på formen HH:MM, ingen extra text")
+            print("Fel typ av tecken. Skriv endast in tiden på formen HH:MM, ingen extra text")
         else:
             fel_inmatning = False
             utdata = [int(i) for i in inputen_uppdelad]
