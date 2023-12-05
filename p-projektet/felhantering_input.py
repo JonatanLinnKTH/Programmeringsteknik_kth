@@ -3,9 +3,9 @@ Detta program hjälper dig att se till att all input som kommer in är av rett d
 Skriven av Jonatan Linn
 Kurskod: DD1310
 """
-def tid(inputtext):
-    """Tar in texten som ska vara tillsammmans med inputen och retunerar lista med 
-    timmar sedan minuter om det är angivet på formen HH:MM, annars skriver ett felmedelande"""
+def rätt_tid(inputtext):
+    """Tar in texten som ska vara tillsammmans med inputen och retunerar lista med timmar 
+    sedan minuter om det är angivet på formen HH:MM, annars skriver ett felmedelande"""
     fel_inmatning = True
     while fel_inmatning:
         inputen = input(inputtext)
@@ -27,9 +27,9 @@ def tid(inputtext):
             utdata = [int(i) for i in inputen_uppdelad]
             return utdata
 
-def menyval(inputtext, meny_alternativ):
-    """Tar in texten som ska vara tillsammans med inputen och retunerar menyvalet som ett string om
-    den är angiven på rett sett, annars slrover ett felmedelande"""
+def rätt_menyval(inputtext, meny_alternativ):
+    """Tar in texten som ska vara tillsammans med inputen och retunerar menyvalet som ett 
+    string om den är angiven på rett sett, annars slrover ett felmedelande"""
     fel_inmatning = True
     while fel_inmatning:
         inputen = input(inputtext)
@@ -47,4 +47,16 @@ def menyval(inputtext, meny_alternativ):
         else:
             fel_inmatning = False
             return inputen
+        
+def finns_filen(inputtext):
+    fel_inmatning = True
+    while fel_inmatning:
+        try:
+            inputen = input(inputtext)
+            with open(inputen, "r", encoding="utf-8"):
+                pass
+            fel_inmatning = False
+            return inputen
+        except FileNotFoundError:
+            print("Filnamnet finns inte, försök igen")
         

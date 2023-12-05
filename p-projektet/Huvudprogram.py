@@ -77,8 +77,8 @@ class Parkeringshus:
         self.finns_bilen och Bil()"""
         print("\nRegistering av inpassage och utpassage")
         registreringsnummer = input("Ange registeringsnummer")
-        starttid = felhantering_input.tid("Ange tide för inpassage: ")
-        sluttid = felhantering_input.tid("Ange tiden för utpassage: ")
+        starttid = felhantering_input.rätt_tid("Ange tide för inpassage: ")
+        sluttid = felhantering_input.rätt_tid("Ange tiden för utpassage: ")
         self.bilar[registreringsnummer].ny_parkering(starttid,sluttid)
         print("\nParkering registerad!")
 
@@ -97,6 +97,12 @@ class Parkeringshus:
     def läs_in_parkeringshistorik(self):
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
         metoderna self.finns_bilen och bil.ny_parkering()"""
+        filnamn = felhantering_input.finns_filen
+        with open(filnamn, "r", encoding 0 "utf-8") as parkeringar:
+            rad = parkeringar.reasline().strip()
+            while rad != "":
+                rad_uppdelad = rad.split(",")
+                
 
     def visa_parkeringshistorik(self):
         """Hanterar utskriften av information om när bilen kom till och lämnade parkeringshuset
@@ -124,7 +130,7 @@ def meny():
             P Räkna ut parkeringskostnad för en bil 
             V Visa parkeringshistorik för en bil 
             S Avsluta.""")
-    menyval = felhantering_input.menyval("Välj ett av åvanstående alternativ: ", ["I","F","N","P","V","S"])
+    menyval = felhantering_input.rätt_menyval("Välj ett av åvanstående alternativ: ", ["I","F","N","P","V","S"])
     return menyval
 
 def huvudprogram():
@@ -141,6 +147,7 @@ def huvudprogram():
             parkeringshus.registrera_parkering()
             print(tillbakatext)
         elif menyval == "F":
+            parkeringshus.läs_in_parkeringshistorik()
             print(tillbakatext)
         elif menyval == "N":
             parkeringshus.registrera_ny_bil()
