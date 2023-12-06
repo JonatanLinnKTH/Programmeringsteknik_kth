@@ -23,7 +23,9 @@ class Parkering:
 
     def __str__(self):
         """Returnerar en sträng som beskriver objektet"""
-        return "Inpassage: " + str(self.starttid) + ", Utpassage: " + str(self.sluttid)
+        inpassage = self.starttid.strftime('%H:%M')
+        utpassage = self.sluttid.strftime('%H:%M')
+        return "Inpassage: " + str(inpassage) + ", Utpassage: " + str(utpassage)
 
 class Bil:
     """Beskriver en bil registrerad i systemet"""
@@ -44,7 +46,9 @@ class Bil:
     
     def ny_parkering(self, inpassage, utpassage):
         """Sparar ett nytt parkeringstillfälle till parkeringslogg"""
-        parkering = Parkering(time(inpassage[0],inpassage[1]),time(utpassage[0],utpassage[1]))
+        inpassage_int = [int(i) for i in inpassage]
+        utpassage_int = [int(i) for i in utpassage]
+        parkering = Parkering(time(inpassage_int[0],inpassage_int[1]),time(utpassage_int[0],utpassage_int[1]))
         self.parkeringslogg.append(parkering)
 
     def ta_fram_parkeringshistorik(self):
@@ -104,13 +108,17 @@ class Parkeringshus:
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
         metoderna self.finns_bilen och bil.ny_parkering()"""
         filnamn = felhantering_input.finns_filen("Vad heter filen? ")
-        with open(filnamn, "r", encoding = "utf-8") as parkeringar:
-            rad = parkeringar.readline().strip()
-            while rad != "":
-                rad_uppdelad = rad.split(";")
-                starttid = rad_uppdelad[1].split(",")
-                sluttid = rad_uppdelad[2].split(",")
-                self.bilar[rad_uppdelad[0]].ny_parkering(starttid,sluttid)
+        with open(filnamn, "r", encoding = "utf-8") as historik:
+            reggistreringsnummer = historik.readline().strip()
+            while reggistreringsnummer != "":
+                parkeringar = historik.readline().strip()
+                parkeringar_uppdelad = parkeringar.split(";")
+                for parkering in parkeringar_uppdelad:
+                    [starttid, sluttid] = parkering.split(",")
+                    starttid_uppdelad = starttid.split(":")
+                    sluttid_uppdelad = sluttid.split(":")
+                    self.bilar[reggistreringsnummer].ny_parkering(starttid_uppdelad,sluttid_uppdelad)
+                reggistreringsnummer = historik.readline().strip()
 
     def visa_parkeringshistorik(self):
         """Hanterar utskriften av information om när bilen kom till och lämnade parkeringshuset

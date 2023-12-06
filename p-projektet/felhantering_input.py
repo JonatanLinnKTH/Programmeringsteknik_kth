@@ -24,8 +24,7 @@ def rätt_tid(inputtext):
             print("Fel typ av tecken. Skriv endast in tiden på formen HH:MM, ingen extra text")
         else:
             fel_inmatning = False
-            utdata = [int(i) for i in inputen_uppdelad]
-            return utdata
+            return inputen_uppdelad
 
 def rätt_menyval(inputtext, meny_alternativ):
     """Tar in texten som ska vara tillsammans med inputen och retunerar menyvalet som ett 
