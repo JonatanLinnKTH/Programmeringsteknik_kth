@@ -52,11 +52,9 @@ class Bil:
         self.parkeringslogg.append(parkering)
 
     def ta_fram_parkeringshistorik(self):
-        """Retunerar en lista med alla loggade klockslag för inpassage och utpassage"""
-        parkeringslista = "\n"
-        for parkering in self.parkeringslogg:
-            parkeringslista += str(parkering) + "\n"
-        return "Registrerade parkeringar: " + parkeringslista
+        return
+
+
 
 class Parkeringshus:
     """Bestkriver ett parkeringshus registrerad i systemet"""
@@ -101,8 +99,9 @@ class Parkeringshus:
 
     def räkna_ut_parkeringskostnad(self):
         """Räknar ut kundens skuld för en viss bil m.h.a. bilens storlek och att avrunda
-        parkeringstiden till närmaste halvtimme samt genom att använda metoden
-        bil.ta_fram_parkeringshistorik()"""
+        parkeringstiden till närmaste halvtimme"""
+        registreringsnummer = input("Ange registeringsnummer på bilen: ")
+        self
     
     def läs_in_parkeringshistorik(self):
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
@@ -124,7 +123,13 @@ class Parkeringshus:
         """Hanterar utskriften av information om när bilen kom till och lämnade parkeringshuset
         genom att använd medoden bil.ta_fram_parkeringshistorik"""
         bil = input("\nVilken bil vill du kolla upp?")
-        print(self.bilar[bil].ta_fram_parkeringshistorik())
+
+        parkeringslista = "\n"
+        for parkering in self.bilar[bil].parkeringslogg:
+            parkeringslista += str(parkering) + "\n"
+
+        print("Registrerade parkeringar: " + parkeringslista)
+        #print(self.bilar[bil].ta_fram_parkeringshistorik())
 
     def spara_parkeringhistorik(self):
         """Sparar alla bilars inpassager och utpassager på fil"""
@@ -179,7 +184,6 @@ def huvudprogram():
         else:
             print("\nSparar all registrerad information om bilar och parkeringar och")
             print("avslutar programmet\n")
-
 
 def testprogram_parkering():
     parkering_1 = Parkering(time(12, 30), time(14, 40))

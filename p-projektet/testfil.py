@@ -8,8 +8,11 @@ print("Entered time", my_time)
 
 my_time = time(minute = 12)
 string = my_time.strftime('%H:%M')
+intedger = my_time.hour
 
-print("\nTime with one argument" + string)
+print("\nTime with one argument " + string)
+print(intedger)
+
 """
 inpassage = input("Startid för parkering: ").split(":",1)
 print(inpassage)
