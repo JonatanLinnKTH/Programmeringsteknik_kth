@@ -98,7 +98,7 @@ class Parkeringshus:
                 rad = registrerade_bilar.readline().strip()
         print("\nParkeringshistrorik registrerad")
 
-    def hämta_parkeringskostnad(self):
+    def räkna_ut_parkeringskostnad(self):
         """Räknar ut kundens skuld för en viss bil m.h.a. bilens storlek och att avrunda
         parkeringstiden till närmaste halvtimme, i detta fall är prissättningen följande stor bil 30 kr/h, 
         mellanbil 25 kr/h, liten bil 20 kr/h"""
@@ -205,7 +205,7 @@ def huvudprogram():
             parkeringshus.registrera_ny_bil()
             print(tillbakatext)
         elif menyval == "P":
-            parkeringshus.hämta_parkeringskostnad()
+            parkeringshus.räkna_ut_parkeringskostnad()
             print(tillbakatext)
         elif menyval == "V":
             parkeringshus.visa_parkeringshistorik()
@@ -213,6 +213,7 @@ def huvudprogram():
         else:
             print("\nSparar all registrerad information om bilar och parkeringar och")
             print("avslutar programmet\n")
+        input("För att gå tillbaka till huvudmenyn klicka enter: ")
 
 def testprogram_parkering():
     parkering_1 = Parkering(time(12, 30), time(14, 40))
