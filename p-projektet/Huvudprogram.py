@@ -9,7 +9,7 @@ Skriven av Jonatan Linn
 Kurskod: DD1310
 """
 
-from datetime import time
+from datetime import datetime, time
 import felhantering_input
 
 class Parkering:
@@ -46,15 +46,16 @@ class Bil:
     
     def ny_parkering(self, inpassage, utpassage):
         """Sparar ett nytt parkeringstillfälle till parkeringslogg"""
+        starttid = datetime.strptime(inpassage, "%H:%M")
+        sluttid = datetime.strptime(utpassage, "%H:%M")
+        parkering = Parkering(starttid,sluttid)
+        self.parkeringslogg.append(parkering)
+        '''
         inpassage_int = [int(i) for i in inpassage]
         utpassage_int = [int(i) for i in utpassage]
         parkering = Parkering(time(inpassage_int[0],inpassage_int[1]),time(utpassage_int[0],utpassage_int[1]))
         self.parkeringslogg.append(parkering)
-
-    def ta_fram_parkeringshistorik(self):
-        return
-
-
+        '''
 
 class Parkeringshus:
     """Bestkriver ett parkeringshus registrerad i systemet"""
@@ -97,16 +98,43 @@ class Parkeringshus:
                 rad = registrerade_bilar.readline().strip()
         print("\nParkeringshistrorik registrerad")
 
-    def räkna_ut_parkeringskostnad(self):
+    def hämta_parkeringskostnad(self):
         """Räknar ut kundens skuld för en viss bil m.h.a. bilens storlek och att avrunda
-        parkeringstiden till närmaste halvtimme"""
-        registreringsnummer = input("Ange registeringsnummer på bilen: ")
-        self
+        parkeringstiden till närmaste halvtimme, i detta fall är prissättningen följande stor bil 30 kr/h, 
+        mellanbil 25 kr/h, liten bil 20 kr/h"""
+        kostnad_stor_bil = 30
+        kostnad_mellan_bil = 25
+        kostand_liten_bil = 20
+        bil = input("Ange registeringsnummer på bilen: ")
+        total_parkerad_tid = 0
+        for parkering in self.bilar[bil].parkeringslogg:
+            parkeringstid = parkering.sluttid - parkering.starttid
+            timmar, resten = divmod(parkeringstid.total_seconds(), 3600)
+            minuter = resten / 60
+            if minuter >= 45:
+                timmar += 1
+            elif minuter >= 15:
+                timmar += 0.5
+            total_parkerad_tid += timmar
+        storlek = self.bilar[bil].biltyp
+        if storlek == "stor":
+            skuld = total_parkerad_tid * kostnad_stor_bil
+        elif storlek == "mellan":
+            skuld = total_parkerad_tid * kostnad_mellan_bil
+        elif storlek == "liten":
+            skuld = total_parkerad_tid * kostand_liten_bil
+        else:
+            print("""Något är fel i registreringen av bilen i systemt, kontrollera att bilen 
+                  är regisrerad som anringen stor, mellan eller liten""")
+        print(f"Kunden har totalt parkerat {total_parkerad_tid} timmar i parkeringhuset")
+        print(f"Kundens skulld är därför {skuld} kr")
+
     
     def läs_in_parkeringshistorik(self):
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
         metoderna self.finns_bilen och bil.ny_parkering()"""
-        filnamn = felhantering_input.finns_filen("Vad heter filen? ")
+        #filnamn = felhantering_input.finns_filen("Vad heter filen? ")
+        filnamn = "parkeringshistorik.txt"
         with open(filnamn, "r", encoding = "utf-8") as historik:
             reggistreringsnummer = historik.readline().strip()
             while reggistreringsnummer != "":
@@ -114,22 +142,23 @@ class Parkeringshus:
                 parkeringar_uppdelad = parkeringar.split(";")
                 for parkering in parkeringar_uppdelad:
                     [starttid, sluttid] = parkering.split(",")
+
+                    self.bilar[reggistreringsnummer].ny_parkering(starttid,sluttid)
+
+                    '''
                     starttid_uppdelad = starttid.split(":")
                     sluttid_uppdelad = sluttid.split(":")
                     self.bilar[reggistreringsnummer].ny_parkering(starttid_uppdelad,sluttid_uppdelad)
+                    '''
                 reggistreringsnummer = historik.readline().strip()
 
     def visa_parkeringshistorik(self):
-        """Hanterar utskriften av information om när bilen kom till och lämnade parkeringshuset
-        genom att använd medoden bil.ta_fram_parkeringshistorik"""
+        """Hanterar utskriften av information om när bilen kom till och lämnade parkeringshuset"""
         bil = input("\nVilken bil vill du kolla upp?")
-
         parkeringslista = "\n"
         for parkering in self.bilar[bil].parkeringslogg:
             parkeringslista += str(parkering) + "\n"
-
         print("Registrerade parkeringar: " + parkeringslista)
-        #print(self.bilar[bil].ta_fram_parkeringshistorik())
 
     def spara_parkeringhistorik(self):
         """Sparar alla bilars inpassager och utpassager på fil"""
@@ -176,7 +205,7 @@ def huvudprogram():
             parkeringshus.registrera_ny_bil()
             print(tillbakatext)
         elif menyval == "P":
-            parkeringshus.räkna_ut_parkeringskostnad()
+            parkeringshus.hämta_parkeringskostnad()
             print(tillbakatext)
         elif menyval == "V":
             parkeringshus.visa_parkeringshistorik()
