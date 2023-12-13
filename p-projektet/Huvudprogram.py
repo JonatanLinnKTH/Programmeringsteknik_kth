@@ -9,7 +9,7 @@ Skriven av Jonatan Linn
 Kurskod: DD1310
 """
 
-from datetime import datetime, time
+from datetime import datetime
 import felhantering_input
 
 class Parkering:
@@ -25,7 +25,13 @@ class Parkering:
         """Returnerar en sträng som beskriver objektet"""
         inpassage = self.starttid.strftime('%H:%M')
         utpassage = self.sluttid.strftime('%H:%M')
-        return "Inpassage: " + str(inpassage) + ", Utpassage: " + str(utpassage)
+        return inpassage + "," + utpassage
+    
+    def visa_parkering(self):
+        """Returnerar en sträng som beskriver objektet"""
+        inpassage = self.starttid.strftime('%H:%M')
+        utpassage = self.sluttid.strftime('%H:%M')
+        return "Inpassage: " + inpassage + ", Utpassage: " + utpassage
 
 class Bil:
     """Beskriver en bil registrerad i systemet"""
@@ -50,12 +56,6 @@ class Bil:
         sluttid = datetime.strptime(utpassage, "%H:%M")
         parkering = Parkering(starttid,sluttid)
         self.parkeringslogg.append(parkering)
-        '''
-        inpassage_int = [int(i) for i in inpassage]
-        utpassage_int = [int(i) for i in utpassage]
-        parkering = Parkering(time(inpassage_int[0],inpassage_int[1]),time(utpassage_int[0],utpassage_int[1]))
-        self.parkeringslogg.append(parkering)
-        '''
 
 class Parkeringshus:
     """Bestkriver ett parkeringshus registrerad i systemet"""
@@ -68,27 +68,22 @@ class Parkeringshus:
     
     def registrera_ny_bil(self):
         """Skapar en ny bil och sparar den i biblioteket bilar"""
-        print("\nRegistrering av ny bil")
         registreringsnummer = input("Vad är bilens registreringsnummer? ")
         ägare = input("Vad är namnet på bilens ägare? ")
         biltyp = input("Kategoriserars bilensom listen, mellan eller stor? ")
         self.bilar[registreringsnummer] = Bil(registreringsnummer, ägare, biltyp)
-        print("\nBilen registrerad!")
 
     def registrera_parkering(self):
         """Hanterar registrering av inpassage och utpassae, genom att bl.a. använda metoderna
         self.finns_bilen och Bil()"""
-        print("\nRegistering av inpassage och utpassage")
         registreringsnummer = input("Ange registeringsnummer")
         starttid = felhantering_input.rätt_tid("Ange tide för inpassage: ")
         sluttid = felhantering_input.rätt_tid("Ange tiden för utpassage: ")
         self.bilar[registreringsnummer].ny_parkering(starttid,sluttid)
-        print("\nParkering registerad!")
 
     def läs_in_registreringshistorik(self):
         """Läser in en fil med redan registreade bilar, genom att bl.a. använda 
         bil.nu_parkering()"""
-        print("\nLäser in pareringshistorik")
         filnamn = "registrerade_bilar.txt"
         with open(filnamn,"r", encoding = "utf-8") as registrerade_bilar:
             rad = registrerade_bilar.readline().strip()
@@ -96,7 +91,6 @@ class Parkeringshus:
                 rad_uppdelad = rad.split(",")
                 self.bilar[rad_uppdelad[0]] = Bil(rad_uppdelad[0],rad_uppdelad[1],rad_uppdelad[2])
                 rad = registrerade_bilar.readline().strip()
-        print("\nParkeringshistrorik registrerad")
 
     def räkna_ut_parkeringskostnad(self):
         """Räknar ut kundens skuld för en viss bil m.h.a. bilens storlek och att avrunda
@@ -126,30 +120,22 @@ class Parkeringshus:
         else:
             print("""Något är fel i registreringen av bilen i systemt, kontrollera att bilen 
                   är regisrerad som anringen stor, mellan eller liten""")
-        print(f"Kunden har totalt parkerat {total_parkerad_tid} timmar i parkeringhuset")
-        print(f"Kundens skulld är därför {skuld} kr")
-
+        return total_parkerad_tid, skuld
+        
     
     def läs_in_parkeringshistorik(self):
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
         metoderna self.finns_bilen och bil.ny_parkering()"""
         #filnamn = felhantering_input.finns_filen("Vad heter filen? ")
-        filnamn = "parkeringshistorik.txt"
+        filnamn = "parkeringshistorik_2.txt"
         with open(filnamn, "r", encoding = "utf-8") as historik:
             reggistreringsnummer = historik.readline().strip()
             while reggistreringsnummer != "":
-                parkeringar = historik.readline().strip()
+                parkeringar = historik.readline().strip()[:-1]
                 parkeringar_uppdelad = parkeringar.split(";")
                 for parkering in parkeringar_uppdelad:
                     [starttid, sluttid] = parkering.split(",")
-
                     self.bilar[reggistreringsnummer].ny_parkering(starttid,sluttid)
-
-                    '''
-                    starttid_uppdelad = starttid.split(":")
-                    sluttid_uppdelad = sluttid.split(":")
-                    self.bilar[reggistreringsnummer].ny_parkering(starttid_uppdelad,sluttid_uppdelad)
-                    '''
                 reggistreringsnummer = historik.readline().strip()
 
     def visa_parkeringshistorik(self):
@@ -157,14 +143,27 @@ class Parkeringshus:
         bil = input("\nVilken bil vill du kolla upp?")
         parkeringslista = "\n"
         for parkering in self.bilar[bil].parkeringslogg:
-            parkeringslista += str(parkering) + "\n"
+            parkeringslista += parkering.visa_parkering() + "\n"
         print("Registrerade parkeringar: " + parkeringslista)
 
     def spara_parkeringhistorik(self):
         """Sparar alla bilars inpassager och utpassager på fil"""
+        filnamn = "parkeringshistorik_2.txt"
+        with open(filnamn, "w", encoding = "utf-8") as fil:
+            for bil in self.bilar.values():
+                fil.write(bil.registreringsnummer + "\n")
+                for parkering in bil.parkeringslogg:
+                    fil.write(str(parkering) + ";")
+                fil.write("\n")
 
     def spara_bilinformation(self):
         """Sparar all information om själa bilen: registreringsnummer, ägare och biltyp, på fil"""
+        filnamn = "registrerade_bilar.txt"
+        with open(filnamn, "w", encoding="utf-8") as fil:
+            for bil in self.bilar.values():
+                fil.write(bil.registreringsnummer + ",")
+                fil.write(bil.ägare + ",")
+                fil.write(bil.biltyp + "\n")
 
 def meny():
     """"Tar in användarens inmatning och returnerar menyvalet. Presenterar menyalternativen: 
@@ -194,40 +193,36 @@ def huvudprogram():
     menyval = "Start"
     while menyval != "S":
         menyval = meny()
-        tillbakatext = "Går tillbaka till menyn"
         if menyval == "I":
+            print("\nRegistering av inpassage och utpassage")
             parkeringshus.registrera_parkering()
-            print(tillbakatext)
+            print("\nParkering registerad!")
+
         elif menyval == "F":
+            print("\nLäser in pareringshistorik")
             parkeringshus.läs_in_parkeringshistorik()
-            print(tillbakatext)
+            print("Inläsning färdig")
+
         elif menyval == "N":
+            print("\nRegistrering av ny bil")
             parkeringshus.registrera_ny_bil()
-            print(tillbakatext)
+            print("\nBilen registrerad!")
+
         elif menyval == "P":
-            parkeringshus.räkna_ut_parkeringskostnad()
-            print(tillbakatext)
+            tid_parkerad,skuld = parkeringshus.räkna_ut_parkeringskostnad()
+            print(f"Kunden har totalt parkerat {tid_parkerad} timmar i parkeringhuset")
+            print(f"Kundens skulld är därför {skuld} kr")
+
         elif menyval == "V":
             parkeringshus.visa_parkeringshistorik()
-            print(tillbakatext)
+
+        if menyval == "S":
+            print("\nSparar all registrerad informatiosn om bilar")
+            print("och parkeringar och avslutar programmet\n")
+            parkeringshus.spara_bilinformation()
+            parkeringshus.spara_parkeringhistorik()
         else:
-            print("\nSparar all registrerad information om bilar och parkeringar och")
-            print("avslutar programmet\n")
-        input("För att gå tillbaka till huvudmenyn klicka enter: ")
-
-def testprogram_parkering():
-    parkering_1 = Parkering(time(12, 30), time(14, 40))
-    print(parkering_1)
-
-def testprogram_Bil():
-    bil_1 = Bil("QPR556", "Carl von Testperson", "liten")
-    print("Registrering av ny parkering")
-    starttid = felhantering_input.rätt_tid("Starttid för parkering")
-    sluttid = felhantering_input.rätt_tid("Sluttid för parkering")
-    bil_1.ny_parkering(starttid, sluttid)
-    print(bil_1)
+            print()
+            input("För att gå tillbaka till huvudmenyn klicka enter: ")
 
 huvudprogram()
-
-#testprogram_Bil()
-
