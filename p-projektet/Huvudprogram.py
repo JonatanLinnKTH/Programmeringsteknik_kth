@@ -76,7 +76,7 @@ class Parkeringshus:
     def registrera_parkering(self):
         """Hanterar registrering av inpassage och utpassae, genom att bl.a. använda metoderna
         self.finns_bilen och Bil()"""
-        registreringsnummer = input("Ange registeringsnummer")
+        registreringsnummer = input("Ange registeringsnummer" )
         starttid = felhantering_input.rätt_tid("Ange tide för inpassage: ")
         sluttid = felhantering_input.rätt_tid("Ange tiden för utpassage: ")
         self.bilar[registreringsnummer].ny_parkering(starttid,sluttid)
@@ -126,12 +126,12 @@ class Parkeringshus:
     def läs_in_parkeringshistorik(self):
         """Läser in en fil med redan registrerade in och utpassager, genom att bl.a. använda 
         metoderna self.finns_bilen och bil.ny_parkering()"""
-        #filnamn = felhantering_input.finns_filen("Vad heter filen? ")
-        filnamn = "parkeringshistorik_2.txt"
+        filnamn = felhantering_input.finns_filen("Vad heter filen? ")
+        #filnamn = "parkeringshistorik_2.txt"
         with open(filnamn, "r", encoding = "utf-8") as historik:
             reggistreringsnummer = historik.readline().strip()
             while reggistreringsnummer != "":
-                parkeringar = historik.readline().strip()[:-1]
+                parkeringar = historik.readline().strip()[:-1] #[:-1] tar bort det sissta semikolonet
                 parkeringar_uppdelad = parkeringar.split(";")
                 for parkering in parkeringar_uppdelad:
                     [starttid, sluttid] = parkering.split(",")
@@ -148,7 +148,7 @@ class Parkeringshus:
 
     def spara_parkeringhistorik(self):
         """Sparar alla bilars inpassager och utpassager på fil"""
-        filnamn = "parkeringshistorik_2.txt"
+        filnamn = "parkeringshistorik.txt"
         with open(filnamn, "w", encoding = "utf-8") as fil:
             for bil in self.bilar.values():
                 fil.write(bil.registreringsnummer + "\n")
