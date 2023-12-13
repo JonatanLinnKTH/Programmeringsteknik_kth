@@ -43,15 +43,19 @@ print(timmar)
 fem = 5
 print(f"hej hej {fem}")
 
+bilar = {}
+
+
 """
 inpassage = input("Startid för parkering: ").split(":",1)
 print(inpassage)
 """
-"""
+
 rad = "QPR556,Carl von Testperson,liten"
 rad_uppdelad = rad.split(",")
-print(rad_uppdelad)
-"""
+bokstäver = rad[0:3]
+print(rad[0:3].isalpha())
+
 """
 filnamn = "registrerade_bilar.txt"
 with open(filnamn,"r", encoding = "utf-8") as registrerade_bilar:

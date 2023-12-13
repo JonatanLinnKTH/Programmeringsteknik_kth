@@ -1,3 +1,0 @@
-QPR556,Carl von Testperson,liten
-GRT892,Bengt Svensson,mellan
-AAA111,AA AA,stor
