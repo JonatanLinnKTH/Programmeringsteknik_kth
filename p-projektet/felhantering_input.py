@@ -8,8 +8,8 @@ def rätt_tid(inputtext):
     är angivet på formen HH:MM, annars skriver ett felmedelande"""
     fel_inmatning = True
     while fel_inmatning:
-        inputen = input(inputtext)
-        inputen_uppdelad = inputen.split(":")
+        inputen = input(inputtext) #Engelskt variablenamn
+        inputen_uppdelad = inputen.split(":") #Engelskt variabelnamn
 
         bara_siffror = True
         for tal in inputen_uppdelad:

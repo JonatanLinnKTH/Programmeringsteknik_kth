@@ -2,3 +2,5 @@ QPR556,Carl von Testperson,liten
 GRT892,Bengt Svensson,mellan
 AAA111,Sara Testdottir,stor
 ABC321,Gunnar Svensson,liten
+GSD666,Josef Kalsson,stor
+KIB124,Karin Bengtsson,stor
