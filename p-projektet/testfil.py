@@ -56,6 +56,7 @@ rad_uppdelad = rad.split(",")
 bokstäver = rad[0:3]
 print(rad[0:3].isalpha())
 
+print("a1".isdigit())
 """
 filnamn = "registrerade_bilar.txt"
 with open(filnamn,"r", encoding = "utf-8") as registrerade_bilar:

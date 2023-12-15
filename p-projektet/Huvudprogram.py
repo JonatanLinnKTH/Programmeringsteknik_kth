@@ -124,6 +124,7 @@ class Parkeringshus:
         kostand_liten_bil = 20
         frågetext = "Vad är registreringsnummret för bilen som ska undersökas? "
         bil = felhantering_input.finns_bilen(frågetext, self.bilar.keys())
+        total_parkerad_tid = 0
         for parkering in self.bilar[bil].parkeringslogg:
             parkeringstid = parkering.sluttid - parkering.starttid
             timmar, resten = divmod(parkeringstid.total_seconds(), 3600)
@@ -132,7 +133,7 @@ class Parkeringshus:
                 timmar += 1
             elif minuter >= 15:
                 timmar += 0.5
-            total_parkerad_tid = timmar
+            total_parkerad_tid += timmar
         storlek = self.bilar[bil].biltyp
         if storlek == "stor":
             skuld = total_parkerad_tid * kostnad_stor_bil

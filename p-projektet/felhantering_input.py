@@ -4,8 +4,8 @@ Skriven av Jonatan Linn
 Kurskod: DD1310
 """
 def rätt_tid(inputtext):
-    """Tar in texten som ska vara tillsammmans med inputen och retunerar en sträng om det är
-    angivet på formen HH:MM, annars skriver ett felmedelande"""
+    """Tar in texten som ska vara tillsammmans med inputen och retunerar tiden som en sträng om det
+    är angivet på formen HH:MM, annars skriver ett felmedelande"""
     fel_inmatning = True
     while fel_inmatning:
         inputen = input(inputtext)
@@ -62,14 +62,15 @@ def finns_filen(inputtext):
             print("Filnamnet finns inte, försök igen")
 
 def är_ett_registreringsnummer(inputtext):
-    """Tar in texten som ska vara tillsammans med inputen och retunerar registreringsnummret som en string om
-    det är angivet på rett sätt"""
+    """Tar in texten som ska vara tillsammans med inputen och retunerar registreringsnummret som en
+    string om det är angivet på rett sätt"""
     fel_inmatning = True
     while fel_inmatning:
         inputen = input(inputtext)
         
         if len(inputen) != 6:
-            print("Fel antal tecken. Registreringsnummret ska var 6 tecken långt på formen 'NNN000', skriv inte heller någon extra text")
+            print("Fel antal tecken. Registreringsnummret ska var 6 tecken långt på formen 'NNN000',")
+            print("skriv inte heller någon extra text")
         elif not inputen[0:3].isalpha() or not inputen[3:6].isdigit():
             print("Fel typ av tecken. Skriv endast in registreringsnummret på formen 'NNN000', ingen extra text")
         elif not inputen[0:3].isupper():
