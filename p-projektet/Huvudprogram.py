@@ -71,6 +71,7 @@ class Parkeringshus:
         self.bilar[registreringsnummer] = Bil(registreringsnummer, ägare, biltyp)
 
     def registrera_parkering(self):
+        #Saknade felhantering av startiden är innan sluttiden
         """Hanterar registrering av inpassage och utpassage, genom att felhantera inputen och
         klassen Bil()"""
         frågetext = "Vad är registreringsnummret för bilen som har parkerat? "
@@ -186,7 +187,8 @@ def meny():
     return menyval
 
 def huvudprogram():
-    """Presenterar användaren för programmet, startar menyfunktionen samt anropar funktioner 
+    """Presenterar användaren för programmet, laddar in de registrerade bilarna genom funktionen
+    parkeringshus.läs_in_registreringshistorik(), startar menyfunktionen samt anropar funktioner 
     som motsvarar menyvalet"""
     parkeringshus = Parkeringshus()
     print("Välkommen till kundsystemet för parkeringshuset!")

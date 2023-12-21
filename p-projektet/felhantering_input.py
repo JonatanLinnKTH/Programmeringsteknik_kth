@@ -15,7 +15,7 @@ def rätt_tid(inputtext):
         for tal in inputen_uppdelad:
             if not tal.isdigit:
                 bara_siffror = False
-
+        #Saknade felhantering av tid större än 24 timmar
         if inputen.count(":") != 1:
             print("Skriv in tiden med ett kolon ':' på formen HH:MM")
         elif len(inputen) != 5:
